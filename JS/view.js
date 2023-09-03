@@ -8,8 +8,9 @@ export function resultView(rendSect, flag, name, population, region, capital) {
     "bg-white",
     "shadow-md",
     "mb-8",
-    "lg:w-3/4",
-    "border"
+    "justify-center",
+    "md:mx-4",
+    "lg:text-2xl"
   );
   infoDiv.classList.add("p-8");
   const flagImg = document.createElement("img");
@@ -18,11 +19,12 @@ export function resultView(rendSect, flag, name, population, region, capital) {
   nameH1.textContent = name;
   nameH1.classList.add("font-bold", "pb-4", "text-xl");
   const populationH1 = document.createElement("h1");
-  populationH1.textContent = `Population: ${population}`;
+  populationH1.innerHTML =
+    '<span class="font-bold">Population:</span> ' + population;
   const regionH1 = document.createElement("h1");
-  regionH1.textContent = `Region: ${region}`;
+  regionH1.innerHTML = '<span class="font-bold">Region:</span> ' + region;
   const capitalH1 = document.createElement("h1");
-  capitalH1.textContent = `Capital: ${capital}`;
+  capitalH1.innerHTML = '<span class="font-bold">Capital:</span> ' + capital;
   infoDiv.appendChild(nameH1);
   infoDiv.appendChild(populationH1);
   infoDiv.appendChild(regionH1);

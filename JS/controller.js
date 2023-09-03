@@ -11,12 +11,13 @@ async function initPage() {
       const { flags, name, population, region, capital: capitals } = result;
       const { svg: flagSvg } = flags;
       const { common: commoName } = name;
+      const formattedPopulation = population.toLocaleString();
       const capStrings = capitals.toString();
       resultView(
         resultSect,
         flagSvg,
         commoName,
-        population,
+        formattedPopulation,
         region,
         capStrings
       );
