@@ -10,7 +10,7 @@ export function resultView(rendSect, flag, name, population, region, capital) {
     "mb-8",
     "justify-center",
     "md:mx-4",
-    "lg:text-2xl"
+    "lg:text-xl"
   );
   infoDiv.classList.add("p-8");
   const flagImg = document.createElement("img");

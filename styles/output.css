@@ -802,6 +802,10 @@ video {
   height: 1.5rem;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .w-10\/12 {
   width: 83.333333%;
 }

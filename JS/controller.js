@@ -38,10 +38,12 @@ arrow.addEventListener("click", () => {
 });
 
 filterBY.addEventListener("click", async (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   clearInit(resultSect);
   const region = e.target.textContent;
+  console.log(spinContainer);
   spinContainer.classList.remove("hidden");
+  console.log(spinContainer);
   try {
     const results = await fetchFilteredData(region);
     results.forEach((result) => {
@@ -51,8 +53,6 @@ filterBY.addEventListener("click", async (e) => {
       const formattedPopulation = population.toLocaleString();
       let capStrings;
       capitals ? (capStrings = capitals.toString()) : "";
-      // const capStrings = capitals.toString();
-      console.log(capStrings);
       resultView(
         resultSect,
         flagSvg,
@@ -65,6 +65,7 @@ filterBY.addEventListener("click", async (e) => {
   } catch (err) {
   } finally {
     spinContainer.classList.add("hidden");
+    dropDown.classList.add("opacity-0");
   }
 });
 
