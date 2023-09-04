@@ -75,25 +75,33 @@
               />
             </div>
           </div>
+
           <div
-            class="bg-white flex md:w-1/5 w-3/5 mt-5 md:mt-0 shadow-md rounded-md p-3 justify-between"
+            class="bg-white relative flex md:w-1/5 sm:w-2/4 w-3/5 mt-5 md:mt-0 shadow-md rounded-md p-3 justify-between"
           >
             <div>
               <h1 class="font-semibold lg:text-xl">Filter by Region</h1>
             </div>
-            <div class="h-6 w-3 flex justify-center items-center relative">
-              <div class="absolute hidden">
-                <img src="./Assets/arrow-down-338-svgrepo-com.svg" alt="" />
-              </div>
+            <div
+              class="h-6 w-3 arrow flex justify-center transform transition-transform duration-300 items-center relative"
+            >
               <div class="absolute hidden">
                 <img src="./Assets/arrow-up-337-svgrepo-com (2).svg" alt="" />
               </div>
               <div class="absolute">
                 <img src="./Assets/arrow-up-337-svgrepo-com.svg" alt="" />
               </div>
-              <div class="absolute hidden">
-                <img src="./Assets/arrow-down-338-svgrepo-com (1).svg" alt="" />
-              </div>
+            </div>
+            <div
+              class="shadow-md filterSect bg-white absolute opacity-0 ease-in-out duration-500 transition-opacity px-4 py-6 top-14 w-full left-0 rounded-md"
+            >
+              <ul class="w-max font-normal">
+                <li>Africa</li>
+                <li>America</li>
+                <li>Asia</li>
+                <li>Europe</li>
+                <li>Oceania</li>
+              </ul>
             </div>
           </div>
         </div>
