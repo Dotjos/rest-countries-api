@@ -1,14 +1,11 @@
-import { fetchData } from "./model.js";
-import { resultView } from "./view.js";
+import { fetchData, fetchFilteredData } from "./model.js";
+import { clearInit, resultView } from "./view.js";
 const resultSect = document.querySelector(".flagInfo");
 const spinContainer = document.querySelector(".spinContainer");
 const spin = document.querySelector(".spin");
 const arrow = document.querySelector(".arrow");
-const filterSect = document.querySelector(".filterSect");
-
-filterSect.addEventListener("click", () => {
-  console.log("click");
-});
+const dropDown = document.querySelector(".filterSect");
+const filterBY = document.querySelector(".filterBY");
 
 async function initPage() {
   try {
@@ -37,7 +34,38 @@ async function initPage() {
 
 arrow.addEventListener("click", () => {
   arrow.classList.toggle("rotate-180");
-  filterSect.classList.toggle("opacity-0");
+  dropDown.classList.toggle("opacity-0");
+});
+
+filterBY.addEventListener("click", async (e) => {
+  e.preventDefault();
+  clearInit(resultSect);
+  const region = e.target.textContent;
+  spinContainer.classList.remove("hidden");
+  try {
+    const results = await fetchFilteredData(region);
+    results.forEach((result) => {
+      const { flags, name, population, region, capital: capitals } = result;
+      const { svg: flagSvg } = flags;
+      const { common: commoName } = name;
+      const formattedPopulation = population.toLocaleString();
+      let capStrings;
+      capitals ? (capStrings = capitals.toString()) : "";
+      // const capStrings = capitals.toString();
+      console.log(capStrings);
+      resultView(
+        resultSect,
+        flagSvg,
+        commoName,
+        formattedPopulation,
+        region,
+        capStrings
+      );
+    });
+  } catch (err) {
+  } finally {
+    spinContainer.classList.add("hidden");
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
