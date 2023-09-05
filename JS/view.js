@@ -62,60 +62,100 @@ export function onClickView(
   capital,
   TLDomain,
   curr,
-  lang,
-  borderCoun
+  lang
 ) {
   const flagDiv = document.createElement("Div");
-  const infoDiv = document.createElement("Div");
+  // flagDiv.classList.add("border");
+  const upperInfoDiv = document.createElement("Div");
+  const totalInfoDiv = document.createElement("Div");
+  totalInfoDiv.classList.add("lg:flex");
   const lowerInfoDiv = document.createElement("Div");
-  const footerDiv = document.createElement("Div");
+  const infoDiv = document.createElement("Div");
+  infoDiv.classList.add("md:flex", "justify-between");
+  const backDiv = document.createElement("Div");
+  const backH1 = document.createElement("h1");
+  backH1.textContent = "Back";
+  const backImg = document.createElement("img");
+  backImg.classList.add("w-6");
+  backImg.src = "./Assets/back-black.svg";
+  backDiv.appendChild(backImg);
+  backDiv.appendChild(backH1);
+  backDiv.classList.add(
+    "px-3",
+    "py-2",
+    "shadow-md",
+    "w-1/3",
+    "lg:w-40",
+    "text-center",
+    "text-lg",
+    "flex",
+    "justify-around",
+    "mt-4",
+    "mb-7",
+    "bg-white"
+  );
+
   const flagImg = document.createElement("img");
   flagImg.src = flag;
+  flagImg.classList.add("h-48", "ml-auto", "mr-auto");
   const nameH1 = document.createElement("h1");
+  nameH1.classList.add("text-lg", "font-bold");
   nameH1.textContent = name;
   const natNameH1 = document.createElement("h1");
   natNameH1.innerHTML =
-    '<span class="font-bold">Native Name:</span> ' + nativeName;
+    '<span class="font-medium">Native Name(s):</span> ' + nativeName;
+  natNameH1.classList.add("mt-4");
   const popH1 = document.createElement("h1");
-  popH1.innerHTML = '<span class="font-bold">Population:</span> ' + population;
+  popH1.innerHTML =
+    '<span class="font-medium">Population:</span> ' + population;
   const regH1 = document.createElement("h1");
-  regH1.innerHTML = '<span class="font-bold">Region:</span> ' + region;
+  regH1.innerHTML = '<span class="font-medium">Region:</span> ' + region;
   const subregH1 = document.createElement("h1");
   subregH1.innerHTML =
-    '<span class="font-bold">Sub region:</span> ' + subRegion;
+    '<span class="font-medium">Sub region:</span> ' + subRegion;
   const capH1 = document.createElement("h1");
-  capH1.innerHTML = '<span class="font-bold">Capital:</span> ' + capital;
+  capH1.innerHTML = '<span class="font-medium">Capital:</span> ' + capital;
   const TLDH1 = document.createElement("h1");
   TLDH1.innerHTML =
-    '<span class="font-bold">Top level Domain:</span> ' + TLDomain;
+    '<span class="font-medium">Top level Domain:</span> ' + TLDomain;
   const currH1 = document.createElement("h1");
-  currH1.innerHTML = '<span class="font-bold">Currencies:</span> ' + curr;
+  currH1.innerHTML = '<span class="font-medium">Currencies:</span> ' + curr;
   const langH1 = document.createElement("h1");
-  langH1.innerHTML = '<span class="font-bold">Languages:</span> ' + lang;
-  const borderCounH1 = document.createElement("h1");
-  borderCounH1.innerHTML =
-    '<span class="font-bold">Border Countries:</span> ' + borderCoun;
+  langH1.innerHTML = '<span class="font-medium">Languages:</span> ' + lang;
   flagDiv.appendChild(flagImg);
-  infoDiv.appendChild(nameH1);
-  infoDiv.appendChild(natNameH1);
-  infoDiv.appendChild(popH1);
-  infoDiv.appendChild(regH1);
-  infoDiv.appendChild(subregH1);
-  infoDiv.appendChild(capH1);
+  upperInfoDiv.classList.add("my-7");
+  lowerInfoDiv.classList.add("mb-7");
+  upperInfoDiv.appendChild(nameH1);
+  upperInfoDiv.appendChild(natNameH1);
+  upperInfoDiv.appendChild(popH1);
+  upperInfoDiv.appendChild(regH1);
+  upperInfoDiv.appendChild(subregH1);
+  upperInfoDiv.appendChild(capH1);
   lowerInfoDiv.appendChild(TLDH1);
   lowerInfoDiv.appendChild(currH1);
   lowerInfoDiv.appendChild(langH1);
-  footerDiv.appendChild(borderCounH1);
-  rendSect.appendChild(flagDiv);
-  rendSect.appendChild(infoDiv);
-  rendSect.appendChild(lowerInfoDiv);
-  rendSect.appendChild(footerDiv);
+  infoDiv.appendChild(upperInfoDiv);
+  infoDiv.appendChild(lowerInfoDiv);
+  totalInfoDiv.appendChild(flagDiv);
+  totalInfoDiv.appendChild(infoDiv);
+  rendSect.appendChild(backDiv);
+  rendSect.appendChild(totalInfoDiv);
 }
 
-export function borderCountView(borderVal) {
-  const bordDiv = document.createElement("Div");
+export function borderCountView(rendDiv, borderVals) {
+  const footerDiv = document.createElement("Div");
   const bordH1 = document.createElement("h1");
-  bordH1.textContent = borderVal;
-  bordDiv.classList.add("p-2", "shadow-md");
-  bordDiv.appendChild(bordH1);
+  bordH1.innerHTML = '<span class="font-medium">Border Countries:</span> ';
+  const borderContDiv = document.createElement("Div");
+  borderContDiv.classList.add("flex", "justify-center", "items-center", "mt-4");
+  borderVals.forEach((bordVal) => {
+    const borderDiv = document.createElement("Div");
+    borderDiv.textContent = bordVal;
+    borderDiv.classList.add("px-4", "py-1", "shadow", "mr-2", "bg-white");
+    borderContDiv.appendChild(borderDiv);
+  });
+  footerDiv.classList.add("md:flex");
+  footerDiv.appendChild(bordH1);
+  footerDiv.appendChild(borderContDiv);
+  rendDiv.appendChild(footerDiv);
 }
