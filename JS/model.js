@@ -19,8 +19,18 @@ export async function fetchFilteredData(region) {
       `https://restcountries.com/v3.1/region/${region}`
     );
     const data = await response.json();
-    console.log(data);
+
     return data;
+  } catch (err) {
+  } finally {
+  }
+}
+
+export async function fetchCountryData(name) {
+  try {
+    const data = fetch(`https://restcountries.com/v3.1/name/${name}`);
+    const response = (await data).json();
+    return response;
   } catch (err) {
   } finally {
   }

@@ -691,6 +691,10 @@ video {
   margin-top: 0.5rem;
 }
 
+.mt-48 {
+  margin-top: 12rem;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -800,10 +804,6 @@ video {
 
 .h-6 {
   height: 1.5rem;
-}
-
-.h-full {
-  height: 100%;
 }
 
 .w-10\/12 {
@@ -1959,6 +1959,10 @@ video {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-4 {
