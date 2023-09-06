@@ -62,20 +62,41 @@ export function onClickView(
   capital,
   TLDomain,
   curr,
-  lang
+  lang,
+  border,
+  bordEvent
 ) {
   const flagDiv = document.createElement("Div");
-  // flagDiv.classList.add("border");
   const upperInfoDiv = document.createElement("Div");
   const totalInfoDiv = document.createElement("Div");
-  totalInfoDiv.classList.add("lg:flex");
   const lowerInfoDiv = document.createElement("Div");
   const infoDiv = document.createElement("Div");
-  infoDiv.classList.add("md:flex", "justify-between");
+  const insideInfoDiv = document.createElement("Div");
   const backDiv = document.createElement("Div");
   const backH1 = document.createElement("h1");
-  backH1.textContent = "Back";
+  const bordDiv = document.createElement("Div");
+  const bordH1 = document.createElement("h1");
   const backImg = document.createElement("img");
+  const flagImg = document.createElement("img");
+  const nameH1 = document.createElement("h1");
+  const natNameH1 = document.createElement("h1");
+  const popH1 = document.createElement("h1");
+  const regH1 = document.createElement("h1");
+  const subregH1 = document.createElement("h1");
+  const capH1 = document.createElement("h1");
+  const TLDH1 = document.createElement("h1");
+  const currH1 = document.createElement("h1");
+  const langH1 = document.createElement("h1");
+  const borderContDiv = document.createElement("Div");
+  backH1.textContent = "Back";
+  totalInfoDiv.classList.add("lg:flex", "lg:justify-around");
+  insideInfoDiv.classList.add(
+    "md:flex",
+    "md:justify-around",
+    "md:items-center",
+    "lg:justify-between"
+  );
+  infoDiv.classList.add("lg:w-2/5");
   backImg.classList.add("w-6");
   backImg.src = "./Assets/back-black.svg";
   backDiv.appendChild(backImg);
@@ -94,38 +115,70 @@ export function onClickView(
     "mb-7",
     "bg-white"
   );
-
-  const flagImg = document.createElement("img");
+  // BorderSect
+  // console.log(border);
+  bordDiv.classList.add(
+    "lg:w-max",
+    "md:flex",
+    "md:items-center",
+    "md:justify-center"
+  );
+  bordH1.innerHTML =
+    '<span class="font-medium lg:text-xl lg:font-semibold">Border Countries: </span> ';
+  borderContDiv.classList.add("flex", "items-center", "justify-center");
+  border.forEach((bord) => {
+    const bordEachDiv = document.createElement("div");
+    const bordH1 = document.createElement("h1");
+    bordH1.textContent = bord;
+    bordEachDiv.appendChild(bordH1);
+    bordEachDiv.classList.add(
+      "px-4",
+      "py-1",
+      "shadow",
+      "mx-2",
+      "bg-white",
+      "lg:text-lg",
+      "lg:font-semibold"
+    );
+    bordEachDiv.addEventListener("click", (e) => {
+      bordEvent(e);
+    });
+    borderContDiv.appendChild(bordEachDiv);
+  });
+  bordDiv.appendChild(bordH1);
+  bordDiv.appendChild(borderContDiv);
+  //
   flagImg.src = flag;
-  flagImg.classList.add("h-48", "ml-auto", "mr-auto");
-  const nameH1 = document.createElement("h1");
-  nameH1.classList.add("text-lg", "font-bold");
+  flagImg.classList.add("ml-auto", "mr-auto", "h-52", "lg:h-96");
+  flagDiv.classList.add("lg:w-2/5");
+  nameH1.classList.add("text-lg", "lg:text-2xl", "lg:mb-12", "font-bold");
   nameH1.textContent = name;
-  const natNameH1 = document.createElement("h1");
   natNameH1.innerHTML =
-    '<span class="font-medium">Native Name(s):</span> ' + nativeName;
-  natNameH1.classList.add("mt-4");
-  const popH1 = document.createElement("h1");
+    '<span class="font-medium lg:text-lg">Native Name(s):</span> ' + nativeName;
+  natNameH1.classList.add("mt-4", "md:mt-2");
   popH1.innerHTML =
-    '<span class="font-medium">Population:</span> ' + population;
-  const regH1 = document.createElement("h1");
-  regH1.innerHTML = '<span class="font-medium">Region:</span> ' + region;
-  const subregH1 = document.createElement("h1");
+    '<span class="font-medium lg:text-lg">Population:</span> ' + population;
+  regH1.innerHTML =
+    '<span class="font-medium lg:text-lg">Region:</span> ' + region;
+
   subregH1.innerHTML =
-    '<span class="font-medium">Sub region:</span> ' + subRegion;
-  const capH1 = document.createElement("h1");
-  capH1.innerHTML = '<span class="font-medium">Capital:</span> ' + capital;
-  const TLDH1 = document.createElement("h1");
+    '<span class="font-medium lg:text-lg">Sub region:</span> ' + subRegion;
+
+  capH1.innerHTML =
+    '<span class="font-medium lg:text-lg">Capital:</span> ' + capital;
+
   TLDH1.innerHTML =
-    '<span class="font-medium">Top level Domain:</span> ' + TLDomain;
-  const currH1 = document.createElement("h1");
-  currH1.innerHTML = '<span class="font-medium">Currencies:</span> ' + curr;
-  const langH1 = document.createElement("h1");
-  langH1.innerHTML = '<span class="font-medium">Languages:</span> ' + lang;
+    '<span class="font-medium lg:text-lg">Top level Domain:</span> ' + TLDomain;
+
+  currH1.innerHTML =
+    '<span class="font-medium lg:text-lg">Currencies:</span> ' + curr;
+
+  langH1.innerHTML =
+    '<span class="font-medium lg:text-lg">Languages:</span> ' + lang;
   flagDiv.appendChild(flagImg);
   upperInfoDiv.classList.add("my-7");
+  // lowerInfoDiv.classList.add("mb-7", "md:mt-16", "lg:mt-28");
   lowerInfoDiv.classList.add("mb-7");
-  upperInfoDiv.appendChild(nameH1);
   upperInfoDiv.appendChild(natNameH1);
   upperInfoDiv.appendChild(popH1);
   upperInfoDiv.appendChild(regH1);
@@ -134,28 +187,13 @@ export function onClickView(
   lowerInfoDiv.appendChild(TLDH1);
   lowerInfoDiv.appendChild(currH1);
   lowerInfoDiv.appendChild(langH1);
-  infoDiv.appendChild(upperInfoDiv);
-  infoDiv.appendChild(lowerInfoDiv);
+  insideInfoDiv.appendChild(upperInfoDiv);
+  insideInfoDiv.appendChild(lowerInfoDiv);
+  infoDiv.appendChild(nameH1);
+  infoDiv.appendChild(insideInfoDiv);
+  infoDiv.appendChild(bordDiv);
   totalInfoDiv.appendChild(flagDiv);
   totalInfoDiv.appendChild(infoDiv);
   rendSect.appendChild(backDiv);
   rendSect.appendChild(totalInfoDiv);
-}
-
-export function borderCountView(rendDiv, borderVals) {
-  const footerDiv = document.createElement("Div");
-  const bordH1 = document.createElement("h1");
-  bordH1.innerHTML = '<span class="font-medium">Border Countries:</span> ';
-  const borderContDiv = document.createElement("Div");
-  borderContDiv.classList.add("flex", "justify-center", "items-center", "mt-4");
-  borderVals.forEach((bordVal) => {
-    const borderDiv = document.createElement("Div");
-    borderDiv.textContent = bordVal;
-    borderDiv.classList.add("px-4", "py-1", "shadow", "mr-2", "bg-white");
-    borderContDiv.appendChild(borderDiv);
-  });
-  footerDiv.classList.add("md:flex");
-  footerDiv.appendChild(bordH1);
-  footerDiv.appendChild(borderContDiv);
-  rendDiv.appendChild(footerDiv);
 }

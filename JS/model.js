@@ -35,3 +35,14 @@ export async function fetchCountryData(name) {
   } finally {
   }
 }
+
+export async function fetchByCode(code) {
+  try {
+    const data = fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+
+    const resp = (await data).json();
+    return resp;
+  } catch (err) {
+  } finally {
+  }
+}

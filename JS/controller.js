@@ -1,5 +1,10 @@
-import { fetchData, fetchFilteredData, fetchCountryData } from "./model.js";
-import { clearInit, resultView, onClickView, borderCountView } from "./view.js";
+import {
+  fetchData,
+  fetchFilteredData,
+  fetchCountryData,
+  fetchByCode,
+} from "./model.js";
+import { clearInit, resultView, onClickView } from "./view.js";
 const resultSect = document.querySelector(".flagInfo");
 const spinContainer = document.querySelector(".spinContainer");
 const spin = document.querySelector(".spin");
@@ -9,9 +14,21 @@ const filterBY = document.querySelector(".filterBY");
 const searchImg = document.querySelector(".searchImg");
 const searchInput = document.querySelector(".searchInput");
 const fullInfo = document.querySelector(".fullInfo");
+const modeSel = document.querySelector(".modeSel");
+const body = document.body;
+const whiteElements = document.querySelectorAll(".bg-white");
+
+modeSel.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("dddd");
+  body.classList.toggle("bg-VeryDarkBlue");
+  whiteElements.forEach((whiteElement) => {
+    whiteElement.classList.toggle("bg-DarkGray");
+  });
+});
+
 searchImg.addEventListener("click", async () => {
   const searchVal = searchInput.value;
-  console.log(searchVal);
   try {
     clearInit(resultSect);
     const results = await fetchCountryData(searchVal);
@@ -44,10 +61,8 @@ async function detailOnClick(e) {
     const clickResult = await fetchCountryData(dataName);
     clearInit(fullInfo);
     clickResult.forEach((result) => {
-      console.log(result);
       const {
         flags,
-        borders,
         name,
         population,
         region,
@@ -56,6 +71,7 @@ async function detailOnClick(e) {
         tld,
         currencies,
         languages,
+        borders,
       } = result;
       const { svg: flagSvg } = flags;
       const { common } = name;
@@ -77,10 +93,58 @@ async function detailOnClick(e) {
         capStrings,
         tldString,
         currName,
-        lang
+        lang,
+        borders,
+        borderDetailOnClick
       );
-      borderCountView(fullInfo, borders);
-      console.log(borders);
+    });
+  } catch (err) {
+  } finally {
+  }
+}
+
+async function borderDetailOnClick(e) {
+  const bordCode = e.currentTarget.textContent;
+  try {
+    const clickResult = await fetchByCode(bordCode);
+    clearInit(fullInfo);
+    clickResult.forEach((result) => {
+      const {
+        flags,
+        name,
+        population,
+        region,
+        subregion,
+        capital: capitals,
+        tld,
+        currencies,
+        languages,
+        borders,
+      } = result;
+      const { svg: flagSvg } = flags;
+      const { common } = name;
+      const { nativeName: nativeObj } = name;
+      const natName = getNativeName(nativeObj).join(",");
+      const popFormatted = population.toLocaleString();
+      const capStrings = capitals.toString();
+      const tldString = tld.toString();
+      const currName = getNameFromCurrency(currencies);
+      const lang = getLang(languages).join(",");
+      onClickView(
+        fullInfo,
+        flagSvg,
+        common,
+        natName,
+        popFormatted,
+        region,
+        subregion,
+        capStrings,
+        tldString,
+        currName,
+        lang,
+        borders,
+        borderDetailOnClick
+      );
     });
   } catch (err) {
   } finally {
@@ -137,6 +201,7 @@ function getNativeName(nativeObj) {
 
 async function initPage() {
   // clearInit(fullInfo);
+
   try {
     const results = await fetchData();
     results.forEach((result) => {
