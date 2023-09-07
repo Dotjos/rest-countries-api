@@ -643,6 +643,10 @@ video {
   left: 0px;
 }
 
+.top-0 {
+  top: 0px;
+}
+
 .top-14 {
   top: 3.5rem;
 }
@@ -836,6 +840,10 @@ video {
   height: 1.5rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .w-1\/3 {
   width: 33.333333%;
 }
@@ -848,16 +856,16 @@ video {
   width: 4rem;
 }
 
-.w-2\/3 {
-  width: 66.666667%;
-}
-
 .w-2\/4 {
   width: 50%;
 }
 
 .w-3 {
   width: 0.75rem;
+}
+
+.w-3\/4 {
+  width: 75%;
 }
 
 .w-3\/5 {
@@ -1853,14 +1861,14 @@ video {
   border-color: hsl(207 26% 17% / var(--tw-border-opacity));
 }
 
-.bg-DarkGray {
+.bg-DarkBlue {
   --tw-bg-opacity: 1;
-  background-color: hsl(0 0% 52% / var(--tw-bg-opacity));
+  background-color: hsl(209 23% 22% / var(--tw-bg-opacity));
 }
 
-.bg-VeryDarkBlue {
+.bg-VeryDarkBlue2 {
   --tw-bg-opacity: 1;
-  background-color: hsl(207 26% 17% / var(--tw-bg-opacity));
+  background-color: hsl(200 15% 8% / var(--tw-bg-opacity));
 }
 
 .bg-VeryLightGray {
@@ -1873,14 +1881,14 @@ video {
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .decoration-slice {
@@ -2208,6 +2216,11 @@ video {
   color: hsl(207 26% 17% / var(--tw-text-opacity));
 }
 
+.text-White {
+  --tw-text-opacity: 1;
+  color: hsl(0 0% 100% / var(--tw-text-opacity));
+}
+
 .text-\[\#336699\]\/\[\.35\] {
   color: rgb(51 102 153 / .35);
 }
@@ -2215,6 +2228,11 @@ video {
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2627,15 +2645,6 @@ video {
     width: 50%;
   }
 
-  .sm\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  .sm\:font-semibold {
-    font-weight: 600;
-  }
-
   .sm\:underline {
     text-decoration-line: underline;
   }
@@ -2717,12 +2726,20 @@ video {
     height: 1.75rem;
   }
 
+  .lg\:h-9 {
+    height: 2.25rem;
+  }
+
   .lg\:h-96 {
     height: 24rem;
   }
 
   .lg\:w-10 {
     width: 2.5rem;
+  }
+
+  .lg\:w-2\/4 {
+    width: 50%;
   }
 
   .lg\:w-2\/5 {
@@ -2775,6 +2792,11 @@ video {
   .lg\:text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .lg\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .lg\:text-xl {

@@ -141,6 +141,7 @@ export function onClickView(
       "lg:font-semibold"
     );
     bordEachDiv.addEventListener("click", (e) => {
+      e.preventDefault();
       bordEvent(e);
     });
     borderContDiv.appendChild(bordEachDiv);

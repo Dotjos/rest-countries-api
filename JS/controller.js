@@ -11,56 +11,81 @@ const spin = document.querySelector(".spin");
 const arrow = document.querySelector(".arrow");
 const dropDown = document.querySelector(".filterSect");
 const filterBY = document.querySelector(".filterBY");
-const searchImg = document.querySelector(".searchImg");
+const searchImg = document.querySelectorAll(".searchImg");
 const searchInput = document.querySelector(".searchInput");
 const fullInfo = document.querySelector(".fullInfo");
 const modeSel = document.querySelector(".modeSel");
 const body = document.body;
 const whiteElements = document.querySelectorAll(".bg-white");
+const modeImg = document.querySelectorAll(".modeImg");
+const modeTxt = document.querySelectorAll(".modeTxt");
+const arrowImg = document.querySelectorAll(".arrowImg");
+const darkImg = document.querySelector(".darkImg");
 
-modeSel.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log("dddd");
-  body.classList.toggle("bg-VeryDarkBlue");
-  whiteElements.forEach((whiteElement) => {
-    whiteElement.classList.toggle("bg-DarkGray");
+modeImg.forEach((img) => {
+  img.addEventListener("click", (e) => {
+    e.preventDefault();
+    body.classList.remove("bg-VeryLightGray");
+    body.classList.toggle("bg-VeryDarkBlue2");
+    body.classList.toggle("text-white");
+    searchInput.classList.toggle("bg-DarkBlue");
+    whiteElements.forEach((whiteElement) => {
+      whiteElement.classList.remove("bg-white");
+      whiteElement.classList.toggle("bg-DarkBlue");
+    });
+    modeImg.forEach((img) => img.classList.toggle("hidden"));
+    searchImg.forEach((img) => {
+      img.classList.toggle("hidden");
+    });
+    modeTxt.forEach((txt) => {
+      txt.classList.toggle("hidden");
+    });
+    arrowImg.forEach((img) => {
+      img.classList.toggle("hidden");
+    });
+    if (darkImg.classList.contains("hidden")) {
+      console.log("light mode");
+    }
   });
 });
 
-searchImg.addEventListener("click", async () => {
-  const searchVal = searchInput.value;
-  try {
-    clearInit(resultSect);
-    const results = await fetchCountryData(searchVal);
-    results.forEach((result) => {
-      const { flags, name, population, region, capital: capitals } = result;
-      const { svg: flagSvg } = flags;
-      const { common: commoName } = name;
-      const formattedPopulation = population.toLocaleString();
-      const capStrings = capitals.toString();
-      resultView(
-        resultSect,
-        flagSvg,
-        commoName,
-        formattedPopulation,
-        region,
-        capStrings,
-        detailOnClick
-      );
-    });
-    console.log(dat);
-  } catch (err) {
-  } finally {
-  }
+searchImg.forEach((img) => {
+  img.addEventListener("click", async () => {
+    const searchVal = searchInput.value;
+    try {
+      clearInit(resultSect);
+      const results = await fetchCountryData(searchVal);
+      results.forEach((result) => {
+        const { flags, name, population, region, capital: capitals } = result;
+        const { svg: flagSvg } = flags;
+        const { common: commoName } = name;
+        const formattedPopulation = population.toLocaleString();
+        const capStrings = capitals.toString();
+        resultView(
+          resultSect,
+          flagSvg,
+          commoName,
+          formattedPopulation,
+          region,
+          capStrings,
+          detailOnClick
+        );
+      });
+      console.log(dat);
+    } catch (err) {
+    } finally {
+    }
+  });
 });
 
 async function detailOnClick(e) {
+  e.preventDefault();
   const dataName = e.currentTarget.getAttribute("dataNAme");
-
   try {
     const clickResult = await fetchCountryData(dataName);
     clearInit(fullInfo);
     clickResult.forEach((result) => {
+      console.log(result);
       const {
         flags,
         name,
@@ -104,6 +129,7 @@ async function detailOnClick(e) {
 }
 
 async function borderDetailOnClick(e) {
+  e.preventDefault();
   const bordCode = e.currentTarget.textContent;
   try {
     const clickResult = await fetchByCode(bordCode);
@@ -227,9 +253,11 @@ async function initPage() {
   }
 }
 
-arrow.addEventListener("click", () => {
-  arrow.classList.toggle("rotate-180");
-  dropDown.classList.toggle("opacity-0");
+arrowImg.forEach((img) => {
+  img.addEventListener("click", () => {
+    arrow.classList.toggle("rotate-180");
+    dropDown.classList.toggle("opacity-0");
+  });
 });
 
 filterBY.addEventListener("click", async (e) => {
