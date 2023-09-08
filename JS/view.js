@@ -89,6 +89,7 @@ export function onClickView(
   const currH1 = document.createElement("h1");
   const langH1 = document.createElement("h1");
   const borderContDiv = document.createElement("Div");
+
   backH1.textContent = "Back";
   totalInfoDiv.classList.add("lg:flex", "lg:justify-around");
   insideInfoDiv.classList.add(
@@ -179,7 +180,7 @@ export function onClickView(
     '<span class="font-medium lg:text-lg">Languages:</span> ' + lang;
   flagDiv.appendChild(flagImg);
   upperInfoDiv.classList.add("my-7");
-  // lowerInfoDiv.classList.add("mb-7", "md:mt-16", "lg:mt-28");
+
   lowerInfoDiv.classList.add("mb-7");
   upperInfoDiv.appendChild(natNameH1);
   upperInfoDiv.appendChild(popH1);

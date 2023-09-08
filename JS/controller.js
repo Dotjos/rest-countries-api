@@ -14,51 +14,8 @@ const filterBY = document.querySelector(".filterBY");
 const searchImg = document.querySelectorAll(".searchImg");
 const searchInput = document.querySelector(".searchInput");
 const fullInfo = document.querySelector(".fullInfo");
-const modeSel = document.querySelector(".modeSel");
-const body = document.body;
-const whiteElements = document.querySelectorAll(".bg-white");
-const modeImg = document.querySelectorAll(".modeImg");
-const modeTxt = document.querySelectorAll(".modeTxt");
-const arrowImg = document.querySelectorAll(".arrowImg");
-const darkSvg = document.querySelector(".darkImg");
-let darkMode = [false];
-modeImg.forEach((img) => {
-  img.addEventListener("click", (e) => {
-    e.preventDefault();
-    Modetoggle();
-    if (darkSvg.classList.contains("hidden")) {
-      console.log("Light mode then");
-      darkMode[0] = false;
-    } else {
-      console.log("Dark");
-      darkMode[0] = true;
-    }
-  });
-});
 
-function Modetoggle() {
-  body.classList.remove("bg-VeryLightGray");
-  body.classList.toggle("bg-DarkBlue");
-  body.classList.toggle("text-white");
-  searchInput.classList.toggle("bg-DarkBlue");
-  dropDown.classList.contains("bg-white")
-    ? dropDown.classList.add("bg-white")
-    : dropDown.classList.add("bg-DarkBlue");
-  whiteElements.forEach((whiteElement) => {
-    whiteElement.classList.remove("bg-white");
-    whiteElement.classList.toggle("bg-DarkBlue");
-  });
-  modeImg.forEach((img) => img.classList.toggle("hidden"));
-  searchImg.forEach((img) => {
-    img.classList.toggle("hidden");
-  });
-  modeTxt.forEach((txt) => {
-    txt.classList.toggle("hidden");
-  });
-  arrowImg.forEach((img) => {
-    img.classList.toggle("hidden");
-  });
-}
+const arrowImg = document.querySelectorAll(".arrowImg");
 
 searchImg.forEach((img) => {
   img.addEventListener("click", async () => {

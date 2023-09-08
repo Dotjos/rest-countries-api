@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./**/*.{html,js}"],
   theme: {
-    fontFamily: { NunitoSans: ["Nunito Sans", "sans - serif"] },
+    fontFamily: {
+      NunitoSans: ["Nunito Sans", "sans - serif"],
+      sacraMento: ["Sacramento", "cursive"],
+    },
+
     extend: {
       colors: {
         DarkBlue: "hsl(209, 23%, 22%)",
