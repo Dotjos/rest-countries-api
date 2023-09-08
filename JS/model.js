@@ -12,8 +12,6 @@ export async function fetchData() {
 }
 
 export async function fetchFilteredData(region) {
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  await delay(2000);
   try {
     const response = await fetch(
       `https://restcountries.com/v3.1/region/${region}`

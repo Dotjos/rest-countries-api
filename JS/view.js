@@ -10,7 +10,11 @@ export function resultView(
   const countryDiv = document.createElement("div");
   const flagDiv = document.createElement("div");
   const infoDiv = document.createElement("div");
-
+  const flagImg = document.createElement("img");
+  const nameH1 = document.createElement("h1");
+  const populationH1 = document.createElement("h1");
+  const regionH1 = document.createElement("h1");
+  const capitalH1 = document.createElement("h1");
   countryDiv.classList.add(
     "rounded-md",
     "overflow-hidden",
@@ -20,21 +24,16 @@ export function resultView(
     "md:mx-4",
     "lg:text-xl"
   );
-
+  flagImg.classList.add("h-48", "w-full");
   countryDiv.setAttribute("dataName", name);
   countryDiv.addEventListener("click", functionClick);
   infoDiv.classList.add("p-8");
-  const flagImg = document.createElement("img");
   flagImg.src = flag;
-  const nameH1 = document.createElement("h1");
   nameH1.textContent = name;
   nameH1.classList.add("font-bold", "pb-4", "text-xl");
-  const populationH1 = document.createElement("h1");
   populationH1.innerHTML =
     '<span class="font-bold">Population:</span> ' + population;
-  const regionH1 = document.createElement("h1");
   regionH1.innerHTML = '<span class="font-bold">Region:</span> ' + region;
-  const capitalH1 = document.createElement("h1");
   capitalH1.innerHTML = '<span class="font-bold">Capital:</span> ' + capital;
   infoDiv.appendChild(nameH1);
   infoDiv.appendChild(populationH1);
@@ -73,8 +72,7 @@ export function onClickView(
   const lowerInfoDiv = document.createElement("Div");
   const infoDiv = document.createElement("Div");
   const insideInfoDiv = document.createElement("Div");
-  const backDiv = document.createElement("Div");
-  const backH1 = document.createElement("h1");
+
   const bordDiv = document.createElement("Div");
   const bordH1 = document.createElement("h1");
   const backImg = document.createElement("img");
@@ -90,7 +88,6 @@ export function onClickView(
   const langH1 = document.createElement("h1");
   const borderContDiv = document.createElement("Div");
 
-  backH1.textContent = "Back";
   totalInfoDiv.classList.add("lg:flex", "lg:justify-around");
   insideInfoDiv.classList.add(
     "md:flex",
@@ -99,24 +96,7 @@ export function onClickView(
     "lg:justify-between"
   );
   infoDiv.classList.add("lg:w-2/5");
-  backImg.classList.add("w-6");
-  backImg.src = "./Assets/back-black.svg";
-  backDiv.appendChild(backImg);
-  backDiv.appendChild(backH1);
-  backDiv.classList.add(
-    "px-3",
-    "py-2",
-    "shadow-md",
-    "w-1/3",
-    "lg:w-40",
-    "text-center",
-    "text-lg",
-    "flex",
-    "justify-around",
-    "mt-4",
-    "mb-7",
-    "bg-white"
-  );
+
   // BorderSect
   // console.log(border);
   bordDiv.classList.add(
@@ -128,6 +108,9 @@ export function onClickView(
   bordH1.innerHTML =
     '<span class="font-medium lg:text-xl lg:font-semibold">Border Countries: </span> ';
   borderContDiv.classList.add("flex", "items-center", "justify-center");
+  if (border.length > 4) {
+    borderContDiv.classList.add("grid", "grid-cols-3", "lg:grid-cols-4");
+  }
   border.forEach((bord) => {
     const bordEachDiv = document.createElement("div");
     const bordH1 = document.createElement("h1");
@@ -142,6 +125,9 @@ export function onClickView(
       "lg:text-lg",
       "lg:font-semibold"
     );
+    if (border.length > 4) {
+      bordEachDiv.classList.add("mt-2");
+    }
     bordEachDiv.addEventListener("click", (e) => {
       e.preventDefault();
       bordEvent(e);
@@ -177,7 +163,7 @@ export function onClickView(
     '<span class="font-medium lg:text-lg">Currencies:</span> ' + curr;
 
   langH1.innerHTML =
-    '<span class="font-medium lg:text-lg">Languages:</span> ' + lang;
+    '<span class="font-medium lg:text-lg">Language(s):</span> ' + lang;
   flagDiv.appendChild(flagImg);
   upperInfoDiv.classList.add("my-7");
 
@@ -197,6 +183,6 @@ export function onClickView(
   infoDiv.appendChild(bordDiv);
   totalInfoDiv.appendChild(flagDiv);
   totalInfoDiv.appendChild(infoDiv);
-  rendSect.appendChild(backDiv);
+
   rendSect.appendChild(totalInfoDiv);
 }
