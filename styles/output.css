@@ -1866,11 +1866,6 @@ video {
   background-color: hsl(209 23% 22% / var(--tw-bg-opacity));
 }
 
-.bg-VeryDarkBlue2 {
-  --tw-bg-opacity: 1;
-  background-color: hsl(200 15% 8% / var(--tw-bg-opacity));
-}
-
 .bg-VeryLightGray {
   --tw-bg-opacity: 1;
   background-color: hsl(0 0% 98% / var(--tw-bg-opacity));
@@ -1879,11 +1874,6 @@ video {
 .bg-\[rgb\(255\2c 0\2c 0\)\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -2616,6 +2606,10 @@ video {
       max-width: 1536px;
     }
   }
+}
+
+.hover\:-bottom-2:hover {
+  bottom: -0.5rem;
 }
 
 .hover\:font-bold:hover {

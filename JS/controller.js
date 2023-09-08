@@ -20,34 +20,45 @@ const whiteElements = document.querySelectorAll(".bg-white");
 const modeImg = document.querySelectorAll(".modeImg");
 const modeTxt = document.querySelectorAll(".modeTxt");
 const arrowImg = document.querySelectorAll(".arrowImg");
-const darkImg = document.querySelector(".darkImg");
-
+const darkSvg = document.querySelector(".darkImg");
+let darkMode = [false];
 modeImg.forEach((img) => {
   img.addEventListener("click", (e) => {
     e.preventDefault();
-    body.classList.remove("bg-VeryLightGray");
-    body.classList.toggle("bg-VeryDarkBlue2");
-    body.classList.toggle("text-white");
-    searchInput.classList.toggle("bg-DarkBlue");
-    whiteElements.forEach((whiteElement) => {
-      whiteElement.classList.remove("bg-white");
-      whiteElement.classList.toggle("bg-DarkBlue");
-    });
-    modeImg.forEach((img) => img.classList.toggle("hidden"));
-    searchImg.forEach((img) => {
-      img.classList.toggle("hidden");
-    });
-    modeTxt.forEach((txt) => {
-      txt.classList.toggle("hidden");
-    });
-    arrowImg.forEach((img) => {
-      img.classList.toggle("hidden");
-    });
-    if (darkImg.classList.contains("hidden")) {
-      console.log("light mode");
+    Modetoggle();
+    if (darkSvg.classList.contains("hidden")) {
+      console.log("Light mode then");
+      darkMode[0] = false;
+    } else {
+      console.log("Dark");
+      darkMode[0] = true;
     }
   });
 });
+
+function Modetoggle() {
+  body.classList.remove("bg-VeryLightGray");
+  body.classList.toggle("bg-DarkBlue");
+  body.classList.toggle("text-white");
+  searchInput.classList.toggle("bg-DarkBlue");
+  dropDown.classList.contains("bg-white")
+    ? dropDown.classList.add("bg-white")
+    : dropDown.classList.add("bg-DarkBlue");
+  whiteElements.forEach((whiteElement) => {
+    whiteElement.classList.remove("bg-white");
+    whiteElement.classList.toggle("bg-DarkBlue");
+  });
+  modeImg.forEach((img) => img.classList.toggle("hidden"));
+  searchImg.forEach((img) => {
+    img.classList.toggle("hidden");
+  });
+  modeTxt.forEach((txt) => {
+    txt.classList.toggle("hidden");
+  });
+  arrowImg.forEach((img) => {
+    img.classList.toggle("hidden");
+  });
+}
 
 searchImg.forEach((img) => {
   img.addEventListener("click", async () => {
@@ -257,6 +268,7 @@ arrowImg.forEach((img) => {
   img.addEventListener("click", () => {
     arrow.classList.toggle("rotate-180");
     dropDown.classList.toggle("opacity-0");
+    dropDown.classList.toggle("hidden");
   });
 });
 

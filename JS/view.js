@@ -10,16 +10,17 @@ export function resultView(
   const countryDiv = document.createElement("div");
   const flagDiv = document.createElement("div");
   const infoDiv = document.createElement("div");
+
   countryDiv.classList.add(
     "rounded-md",
     "overflow-hidden",
-    "bg-white",
     "shadow-md",
     "mb-8",
     "justify-center",
     "md:mx-4",
     "lg:text-xl"
   );
+
   countryDiv.setAttribute("dataName", name);
   countryDiv.addEventListener("click", functionClick);
   infoDiv.classList.add("p-8");
