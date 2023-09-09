@@ -108,32 +108,37 @@ export function onClickView(
   bordH1.innerHTML =
     '<span class="font-medium lg:text-xl lg:font-semibold">Border Countries: </span> ';
   borderContDiv.classList.add("flex", "items-center", "justify-center");
-  if (border.length > 4) {
+
+  if (Array.isArray(border) && border.length > 4) {
     borderContDiv.classList.add("grid", "grid-cols-3", "lg:grid-cols-4");
   }
-  border.forEach((bord) => {
-    const bordEachDiv = document.createElement("div");
-    const bordH1 = document.createElement("h1");
-    bordH1.textContent = bord;
-    bordEachDiv.appendChild(bordH1);
-    bordEachDiv.classList.add(
-      "px-4",
-      "py-1",
-      "shadow",
-      "mx-2",
-      "bg-white",
-      "lg:text-lg",
-      "lg:font-semibold"
-    );
-    if (border.length > 4) {
-      bordEachDiv.classList.add("mt-2");
-    }
-    bordEachDiv.addEventListener("click", (e) => {
-      e.preventDefault();
-      bordEvent(e);
+
+  if (Array.isArray(border)) {
+    border.forEach((bord) => {
+      const bordEachDiv = document.createElement("div");
+      const bordH1 = document.createElement("h1");
+      bordH1.textContent = bord;
+      bordEachDiv.appendChild(bordH1);
+      bordEachDiv.classList.add(
+        "px-4",
+        "py-1",
+        "shadow",
+        "mx-2",
+        "bg-white",
+        "lg:text-lg",
+        "lg:font-semibold"
+      );
+      if (border.length > 4) {
+        bordEachDiv.classList.add("mt-2");
+      }
+      bordEachDiv.addEventListener("click", (e) => {
+        e.preventDefault();
+        bordEvent(e);
+      });
+      borderContDiv.appendChild(bordEachDiv);
     });
-    borderContDiv.appendChild(bordEachDiv);
-  });
+  }
+
   bordDiv.appendChild(bordH1);
   bordDiv.appendChild(borderContDiv);
   //
@@ -185,4 +190,12 @@ export function onClickView(
   totalInfoDiv.appendChild(infoDiv);
 
   rendSect.appendChild(totalInfoDiv);
+}
+
+export function errDisplay(dispSect, errMess) {
+  clearInit(dispSect);
+  const errH1 = document.createElement("H1");
+  errH1.classList.add("lg:text-xl", "lg:mt-32", "mt-16");
+  errH1.textContent = errMess;
+  dispSect.appendChild(errH1);
 }

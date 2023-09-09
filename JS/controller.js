@@ -4,7 +4,7 @@ import {
   fetchCountryData,
   fetchByCode,
 } from "./model.js";
-import { clearInit, resultView, onClickView } from "./view.js";
+import { clearInit, resultView, onClickView, errDisplay } from "./view.js";
 const resultSect = document.querySelector(".flagInfo");
 const spinContainer = document.querySelector(".spinContainer");
 const spin = document.querySelector(".spin");
@@ -28,6 +28,7 @@ searchBar.addEventListener("keydown", async (e) => {
 async function searchFunc() {
   const searchVal = searchInput.value;
   clearInit(resultSect);
+  spinContainer.classList.remove("hidden");
   try {
     const results = await fetchCountryData(searchVal);
     results.forEach((result) => {
@@ -46,15 +47,21 @@ async function searchFunc() {
         detailOnClick
       );
     });
-    console.log(dat);
   } catch (err) {
+    let errMess;
+    if (err.message === "Kindly check your network and try again pls.") {
+      errMess = "Unable to connect to the internet.";
+    } else if (err.message === "Invalid country name.") {
+      errMess = "Invalid country name.";
+    }
+    errDisplay(resultSect, errMess);
   } finally {
+    spinContainer.classList.add("hidden");
   }
 }
 
 async function initPage() {
   clearInit(resultSect);
-
   try {
     const results = await fetchData();
     results.forEach((result) => {
@@ -62,7 +69,7 @@ async function initPage() {
       const { svg: flagSvg } = flags;
       const { common: commoName } = name;
       const formattedPopulation = population.toLocaleString();
-      const capStrings = capitals.toString();
+      const capStrings = capitals ? capitals.join(", ") : "";
       resultView(
         resultSect,
         flagSvg,
@@ -74,26 +81,24 @@ async function initPage() {
       );
     });
   } catch (err) {
-    console.err;
+    errDisplay(resultSect, err.message);
   } finally {
     spinContainer.classList.add("hidden");
   }
 }
 
 searchImg.addEventListener("click", async () => {
-  console.log("lol");
   await searchFunc();
 });
 
 async function detailOnClick(e) {
+  spinContainer.classList.remove("hidden");
   clearInit(resultSect);
   e.preventDefault();
   const dataName = e.currentTarget.getAttribute("dataNAme");
   try {
     const clickResult = await fetchCountryData(dataName);
-
     clickResult.forEach((result) => {
-      console.log(result);
       const {
         flags,
         name,
@@ -132,13 +137,16 @@ async function detailOnClick(e) {
       );
     });
   } catch (err) {
+    errDisplay(resultSect, err.message);
   } finally {
+    spinContainer.classList.add("hidden");
   }
 }
 
 async function borderDetailOnClick(e) {
+  spinContainer.classList.remove("hidden");
   e.preventDefault();
-  // clearInit(resultSect);
+  clearInit(resultSect);
   const bordCode = e.currentTarget.textContent;
   try {
     const clickResult = await fetchByCode(bordCode);
@@ -166,7 +174,7 @@ async function borderDetailOnClick(e) {
       const currName = getNameFromCurrency(currencies);
       const lang = getLang(languages).join(",");
       onClickView(
-        fullInfo,
+        resultSect,
         flagSvg,
         common,
         natName,
@@ -182,7 +190,9 @@ async function borderDetailOnClick(e) {
       );
     });
   } catch (err) {
+    errDisplay(resultSect, err.message);
   } finally {
+    spinContainer.classList.add("hidden");
   }
 }
 
@@ -247,11 +257,12 @@ arrowImg.addEventListener("click", (e) => {
 });
 
 filterBY.addEventListener("click", async (e) => {
+  spinContainer.classList.remove("hidden");
   e.preventDefault();
   clearInit(resultSect);
   arrow.classList.remove("rotate-180");
   const region = e.target.textContent;
-  spinContainer.classList.remove("hidden");
+  console.log(region);
   try {
     const results = await fetchFilteredData(region);
     results.forEach((result) => {
@@ -272,6 +283,7 @@ filterBY.addEventListener("click", async (e) => {
       );
     });
   } catch (err) {
+    errMess(resultSect, err.message);
   } finally {
     spinContainer.classList.add("hidden");
     dropDown.classList.add("opacity-0");
