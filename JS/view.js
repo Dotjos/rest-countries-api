@@ -22,9 +22,10 @@ export function resultView(
     "mb-8",
     "justify-center",
     "md:mx-4",
-    "lg:text-xl"
+    "lg:text-xl",
+    "bg-white"
   );
-  flagImg.classList.add("h-48", "w-full");
+  flagImg.classList.add("h-48", "w-full", "object-cover");
   countryDiv.setAttribute("dataName", name);
   countryDiv.addEventListener("click", functionClick);
   infoDiv.classList.add("p-8");
